@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>导航中…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<script>
+  // 最终弹窗内容（已确认）
+  alert("很开心在这里遇见你们，这段经历我会记在心里。\n江湖不远，祝我们都越来越好。");
+
+  // 地址（百度 & 苹果地图）
+  const address = "江苏省苏州市昆山市千灯状元楼酒店(千灯古镇店)";
+
+  // 高德地图：固定终点链接
+  const amapFinal = "https://surl.amap.com/fMtiPvg1i4eq";
+
+  // 百度 & 苹果地图
+  const baidu = "baidumap://map/direction?destination=" + encodeURIComponent(address) + "&mode=driving";
+  const apple = "https://maps.apple.com/?daddr=" + encodeURIComponent(address);
+
+  // 3 秒后跳转
+  setTimeout(() => {
+    const ua = navigator.userAgent.toLowerCase();
+
+    if (ua.includes("iphone") || ua.includes("ipad")) {
+      window.location.href = apple;
+    } else if (ua.includes("android")) {
+      window.location.href = amapFinal;
+      setTimeout(() => {
+        window.location.href = baidu;
+      }, 1000);
+    } else {
+      window.location.href = amapFinal;
+    }
+  }, 3000);
+</script>
+
+</body>
+</html>
